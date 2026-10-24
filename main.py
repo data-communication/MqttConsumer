@@ -8,14 +8,6 @@ from dotenv import load_dotenv
 from messaging.mqtt_service import MqttService
 from dashboard.dashboard import Dashboard
 
-async def handle_message(payload, dashboard: Dashboard):
-    try:
-        data = json.loads(payload)
-        device_id = data.get("deviceId") or data.get("id") or "unknown"
-        dashboard.update(device_id, data)
-    except Exception:
-        print("Invalid MQTT telemetry payload")
-
 async def main():
     load_dotenv()
 
